@@ -1582,19 +1582,19 @@ class Obstacle {
     
     this.animTime = Math.random() * 10;
     
-    // Select a comical speech phrase that matches the politician type
+    // Select a comical speech phrase that matches the city hazard type
     if (this.type === 'leader_shouting') {
-      const phrases = ["GET A JOB!", "NO VACANCIES!", "GO TO STAGE!", "TAX THE YOUTH!", "RE-EXAM IN 2027!"];
+      const phrases = ["WATCH OUT!", "STEP ASIDE!", "DON'T RUN HERE!", "HEY YOU!", "STOP THERE!"];
       this.phrase = phrases[Math.floor(Math.random() * phrases.length)];
       this.width = 75;
       this.height = 75;
     } else if (this.type === 'leader_cash') {
-      const phrases = ["BRIBE ME FIRST!", "SWISS VAULT!", "LEAKED PAPER?", "CASH FOR NOC!"];
+      const phrases = ["PAY THE RENT!", "LATE FEES!", "NO PETS!", "RENT IS DUE!"];
       this.phrase = phrases[Math.floor(Math.random() * phrases.length)];
       this.width = 80;
       this.height = 80;
     } else if (this.type === 'leader_bureaucrat') {
-      const phrases = ["FILE DENIED!", "NOC MANDATORY!", "COME TOMORROW!", "UNDER TABLE?"];
+      const phrases = ["ENTRY DENIED!", "PASS NEEDED!", "COME TOMORROW!", "WRONG FORM!"];
       this.phrase = phrases[Math.floor(Math.random() * phrases.length)];
       this.width = 75;
       this.height = 75;
@@ -2080,8 +2080,8 @@ class Obstacle {
         ctx.fillStyle = '#e11d48';
         ctx.font = 'bold 5px "Press Start 2P", monospace';
         ctx.textAlign = 'center';
-        ctx.fillText("EXAM", 0, -8);
-        ctx.fillText("LEAK", 0, -2);
+        ctx.fillText("CITY", 0, -8);
+        ctx.fillText("NEWS", 0, -2);
         
         ctx.restore();
       });
@@ -2394,7 +2394,6 @@ class GameEngine {
     document.getElementById('pause-screen').classList.add('hidden');
     document.getElementById('game-over-screen').classList.add('hidden');
     document.getElementById('shop-screen').classList.add('hidden');
-    document.getElementById('bonds-screen').classList.add('hidden');
     
     if (screenId) {
       document.getElementById(screenId).classList.remove('hidden');
@@ -2464,7 +2463,7 @@ class GameEngine {
     document.getElementById('go-score').innerText = finalScore;
     document.getElementById('go-bulbs').innerText = this.campaignBulbs;
     
-    const rankObj = this.evaluateSatiricalRank(finalScore);
+    const rankObj = this.evaluateRunnerRank(finalScore);
     document.getElementById('go-rank').innerText = rankObj.rank;
     document.getElementById('go-rank-desc').innerText = rankObj.desc;
     
@@ -2472,26 +2471,26 @@ class GameEngine {
     document.getElementById('power-up-bar-container').classList.add('hidden');
   }
 
-  evaluateSatiricalRank(score) {
+  evaluateRunnerRank(score) {
     if (score < 400) {
       return {
-        rank: "COUCH POTATO GRAD 🛋️",
-        desc: `"Rejected at 20 interviews. Back to scrolling endless social reels..."`
+        rank: "AMATEUR ROACH 🪳",
+        desc: `"A slow start in the big neon city. Dust yourself off and try again!"`
       };
     } else if (score < 1200) {
       return {
-        rank: "SYSTEM STRUGGLER 📑",
-        desc: `"Dodged shouting politicians but got tripped by red tape. Re-applying next year..."`
+        rank: "STREET RUNNER 🏃",
+        desc: `"Dodged angry landlords and tricky barricades! You're finding your stride."`
       };
     } else if (score < 2500) {
       return {
-        rank: "ACTIVIST GRADUATE 📣",
-        desc: `"Leaped over corrupt briefcases and exam leaks. The system is shaking!"`
+        rank: "NEON DASH CHAMP ⚡",
+        desc: `"Leaped over flying newspaper stacks and street obstacles. Speeding up!"`
       };
     } else {
       return {
-        rank: "SYSTEM SURVIVOR HERO 👑",
-        desc: `"Invincible graduate! Dodged tax scams, file deniers, and corrupt briefcases. Complete legend status!"`
+        rank: "URBAN ESCAPE LEGEND 👑",
+        desc: `"Completely invincible! A true legend of the retro skyline. Nothing can stop you!"`
       };
     }
   }
@@ -2650,7 +2649,7 @@ class GameEngine {
       shieldBtn.classList.add('active');
       shieldBtn.disabled = true;
     } else {
-      shieldBtn.innerText = 'ACQUIRE BOND';
+      shieldBtn.innerText = 'ACQUIRE SHIELD';
       shieldBtn.classList.remove('active');
       shieldBtn.disabled = false;
     }
@@ -2679,7 +2678,7 @@ class GameEngine {
       this.updateHUDValues();
       this.refreshShopUI();
     } else {
-      alert("⚠️ INSUFFICIENT CAMPAIGN BUDGET! Bribe some anonymous Electoral Bonds to load funds instantly!");
+      alert("⚠️ INSUFFICIENT ENERGY BULBS! Collect more bulbs during your run to purchase this skin.");
     }
   }
 
@@ -2711,7 +2710,7 @@ class GameEngine {
       this.updateHUDValues();
       this.refreshShopUI();
     } else {
-      alert("⚠️ BUDGET LIMIT REACHED! Bypassed using mock Electoral Bonds.");
+      alert("⚠️ INSUFFICIENT ENERGY BULBS! Collect more bulbs during your run to purchase this upgrade.");
     }
   }
 
@@ -2978,47 +2977,7 @@ class GameEngine {
       });
     }
 
-    // Electoral Bonds dialog
-    const openBondsStart = document.getElementById('btn-open-bonds-start');
-    const openBondsGO = document.getElementById('btn-open-bonds-go');
-    const closeBonds = document.getElementById('btn-close-bonds');
-    
-    [openBondsStart, openBondsGO].forEach(btn => {
-      if (btn) {
-        btn.addEventListener('click', () => {
-          sfx.playButtonClick();
-          document.getElementById('bonds-screen').classList.remove('hidden');
-        });
-      }
-    });
-    
-    if (closeBonds) {
-      closeBonds.addEventListener('click', () => {
-        sfx.playButtonClick();
-        document.getElementById('bonds-screen').classList.add('hidden');
-      });
-    }
 
-    // Secure anonymous bribery
-    document.getElementById('btn-buy-bond-mock').addEventListener('click', () => {
-      sfx.playPowerup();
-      this.bulbsCount += 10000;
-      this.savePersistenceData();
-      this.updateHUDValues();
-      this.refreshShopUI();
-      
-      // splash gold stars particles
-      for (let i = 0; i < 20; i++) {
-        this.particles.spawnSparkles(
-          this.canvas.width / 2 + Math.random() * 200 - 100, 
-          this.canvas.height / 2 + Math.random() * 200 - 100, 
-          '#ffd700'
-        );
-      }
-      
-      alert("💸 ELECTORAL BONDS CREDITED! Swiss Account loaded. +10,000 💡 Bulbs added in complete political secrecy. Upgrades unlocked!");
-      document.getElementById('bonds-screen').classList.add('hidden');
-    });
 
     // Tab selectors in store
     const tabs = document.querySelectorAll('.shop-tab');
