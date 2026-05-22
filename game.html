@@ -1,0 +1,280 @@
+<!--
+========================================================================
+COCKROACH RUNNER - ADS.TXT CONFIGURATION
+========================================================================
+Place the following content in a file named "ads.txt" at your domain root:
+
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+
+========================================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Cockroach Runner: Unemployed vs The System</title>
+  <!-- Google Fonts: Outfit for clean UI, Press Start 2P for retro arcade elements -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app-container">
+    <!-- Immersive Arcade Console Container -->
+    <div id="browser-window">
+      <!-- Core Game Viewport Wrapper -->
+      <div id="viewport-wrapper">
+        <canvas id="gameCanvas" width="1000" height="500"></canvas>
+
+        <!-- Dynamic Absolute HUD Overlay (Exactly as shown in Image) -->
+        <div id="game-hud">
+          <div class="hud-left">
+            <div id="hud-score">SCORE: <span id="score-val">0</span></div>
+            <div id="hud-high">HIGH SCORE: <span id="high-val">0</span></div>
+          </div>
+          
+          <div class="hud-center">
+            <!-- Active power-up progress track (Invincibility/Chai timer) -->
+            <div id="power-up-bar-container" class="hidden">
+              <div id="power-up-progress"></div>
+            </div>
+          </div>
+          
+          <div class="hud-right">
+            <div id="hud-level">LEVEL <span id="level-val">1</span></div>
+            <button id="btn-settings" class="hud-icon-btn" title="Settings">⚙️</button>
+          </div>
+        </div>
+
+        <!-- Floating White JUMP Button (Exactly as shown in Image) -->
+        <div id="floating-jump-container">
+          <button id="btn-floating-jump">
+            <span class="jump-icon">🪳</span>
+            <span class="jump-text">JUMP</span>
+          </button>
+          <div class="jump-subtext">TAP ANYWHERE / SPACE</div>
+        </div>
+
+        <!-- Touch Controls Overlay for Mobile sliding -->
+        <div id="mobile-duck-overlay">
+          <button id="btn-mobile-duck" class="mobile-btn">
+            <span class="btn-icon">⬇</span>
+            <span class="btn-lbl">SLIDE / DUCK</span>
+          </button>
+        </div>
+
+        <!-- Overlay: Start Screen -->
+        <div id="start-screen" class="overlay">
+          <div class="overlay-content">
+            <h2 class="press-start text-blue">COCKROACH RUNNER</h2>
+            <p class="flavor-text">Red tape is thick, exam papers are leaking, and corrupt politicians are hoarding money briefcases. As an unemployed, struggling youth represented by a resilient cute cartoon cockroach, you are fighting against the corrupt system! Dodge bribes, jump over red tape, collect Resilience Bulbs, and survive the struggle!</p>
+            
+            <div class="instructions">
+              <div class="instruction-group">
+                <div class="key">SPACE / W / ⬆</div>
+                <span>JUMP (Double Jump supported!)</span>
+              </div>
+              <div class="instruction-group">
+                <div class="key">S / ⬇</div>
+                <span>DUCK / SLIDE</span>
+              </div>
+            </div>
+
+            <button id="btn-start" class="btn btn-primary btn-pulse">START STRUGGLE</button>
+            <div class="start-actions">
+              <button id="btn-open-store-start" class="btn btn-secondary">🛒 YOUTH STORE</button>
+              <button id="btn-open-bonds-start" class="btn btn-gold">📜 UNDER-THE-TABLE FUNDS</button>
+            </div>
+            <a href="index.html" class="btn btn-secondary btn-home" style="margin-top: 12px; width: 100%; max-width: 320px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">🏠 RETURN TO PORTAL</a>
+          </div>
+        </div>
+
+        <!-- Overlay: Pause Screen -->
+        <div id="pause-screen" class="overlay hidden">
+          <div class="overlay-content">
+            <h2 class="press-start text-blue">STRUGGLE PAUSED</h2>
+            <p class="flavor-text">Shuffling files and dodging tax audits...</p>
+            
+            <div class="settings-panel">
+              <div class="settings-row">
+                <span>SOUND EFFECTS:</span>
+                <button id="btn-audio-toggle" class="btn-toggle active">ON</button>
+              </div>
+              <div class="settings-row">
+                <span>SYNTH BGM MUSIC:</span>
+                <button id="btn-music-toggle" class="btn-toggle active">ON</button>
+              </div>
+            </div>
+
+            <button id="btn-resume" class="btn btn-primary">RESUME STRUGGLE</button>
+            <a href="index.html" class="btn btn-secondary btn-home" style="margin-top: 12px; width: 100%; max-width: 320px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">🏠 RETURN TO PORTAL</a>
+          </div>
+        </div>
+
+        <!-- Overlay: Game Over Screen -->
+        <div id="game-over-screen" class="overlay hidden">
+          <div class="overlay-content">
+            <h2 class="press-start text-red text-shake">STRUGGLE CRASHED!</h2>
+            
+            <!-- Satirical Scoreboard Card -->
+            <div id="scoreboard-card">
+              <div class="score-row">
+                <span>Final Score:</span>
+                <span id="go-score" class="text-white">0</span>
+              </div>
+              <div class="score-row">
+                <span>Bulbs Gathered:</span>
+                <span id="go-bulbs" class="text-gold">0</span>
+              </div>
+              <div class="rank-box">
+                <div class="rank-title">SATIRICAL YOUTH STATUS:</div>
+                <div id="go-rank" class="rank-name text-blue-glow">COUCH POTATO GRAD</div>
+                <div id="go-rank-desc" class="rank-desc">"Rejected at 20 interviews. Back to scrolling endless social reels..."</div>
+              </div>
+            </div>
+
+            <div class="game-over-actions">
+              <button id="btn-restart" class="btn btn-primary btn-pulse">STRUGGLE AGAIN</button>
+              <button id="btn-open-store-go" class="btn btn-secondary">🛒 YOUTH STORE</button>
+              <button id="btn-open-bonds-go" class="btn btn-gold">📜 UNDER-THE-TABLE FUNDS</button>
+            </div>
+            <a href="index.html" class="btn btn-secondary btn-home" style="margin-top: 12px; width: 100%; max-width: 320px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">🏠 RETURN TO PORTAL</a>
+          </div>
+        </div>
+
+        <!-- Overlay: Campaign Upgrade Store -->
+        <div id="shop-screen" class="overlay hidden">
+          <div class="overlay-content shop-content">
+            <div class="shop-header">
+              <h2 class="press-start text-blue">YOUTH STRUGGLE STORE</h2>
+              <button id="btn-close-shop" class="btn-close">&times;</button>
+            </div>
+            <p class="shop-subtitle">Dodge hurdles, acquire survival perks, and dress up your cockroach using collected 💡 Resilience Bulbs!</p>
+            
+            <div class="shop-balance">
+              <span>Your Wallet:</span>
+              <span class="text-gold"><span id="shop-balance-val">0</span> 💡 Bulbs</span>
+            </div>
+
+            <div class="shop-tabs">
+              <button class="shop-tab active" data-tab="skins">COSMETIC SKINS</button>
+              <button class="shop-tab" data-tab="upgrades">SURVIVAL PERKS</button>
+            </div>
+
+            <!-- Tab Content: Skins -->
+            <div id="shop-tab-skins" class="shop-grid tab-pane">
+              <!-- Skin: Default -->
+              <div class="shop-card purchased" data-skin="default">
+                <div class="skin-preview" id="preview-default">🪳</div>
+                <h3>Unemployed Graduate</h3>
+                <p>Holding a rejected resume and a sleeping mask. The default state of ultimate resilience.</p>
+                <button class="btn btn-shop btn-equip active" data-skin-action="equip" data-skin-name="default">EQUIPPED</button>
+              </div>
+
+              <!-- Skin: VIP Bureaucrat -->
+              <div class="shop-card" data-skin="vip">
+                <div class="skin-preview" id="preview-vip">🚨</div>
+                <h3>Sarkari Job Aspirant</h3>
+                <p>Armed with study books and a flashing beacon of aspiration, preparing 24/7.</p>
+                <div class="price">💡 100</div>
+                <button class="btn btn-shop btn-buy" data-skin-action="buy" data-skin-name="vip" data-cost="100">BUY SKIN</button>
+              </div>
+
+              <!-- Skin: Politician -->
+              <div class="shop-card" data-skin="politician">
+                <div class="skin-preview" id="preview-politician">📣</div>
+                <h3>Rebellious Protester</h3>
+                <p>Equipped with a red protest headband and a "JOBS NOW!" placard.</p>
+                <div class="price">💡 250</div>
+                <button class="btn btn-shop btn-buy" data-skin-action="buy" data-skin-name="politician" data-cost="250">BUY SKIN</button>
+              </div>
+
+              <!-- Skin: Golden Resilience -->
+              <div class="shop-card" data-skin="golden">
+                <div class="skin-preview" id="preview-golden">👑</div>
+                <h3>Viral Influencer</h3>
+                <p>Cool golden headphones and shades. Leaves behind shining gold sparkles.</p>
+                <div class="price">💡 500</div>
+                <button class="btn btn-shop btn-buy" data-skin-action="buy" data-skin-name="golden" data-cost="500">BUY SKIN</button>
+              </div>
+            </div>
+
+            <!-- Tab Content: Upgrades -->
+            <div id="shop-tab-upgrades" class="shop-grid tab-pane hidden">
+              <!-- Upgrade: Bail Bond -->
+              <div class="shop-card" id="card-upgrade-shield">
+                <div class="upgrade-icon">🛡️</div>
+                <h3>Bail Bond (Extra Life)</h3>
+                <p>Start each run with legal protection that absorbs exactly 1 corrupt collision crash!</p>
+                <div class="price">💡 150</div>
+                <button class="btn btn-shop btn-buy" id="btn-buy-shield" data-upgrade-action="buy" data-upgrade-name="shield" data-cost="150">ACQUIRE BOND</button>
+              </div>
+
+              <!-- Upgrade: Campaign Magnet -->
+              <div class="shop-card" id="card-upgrade-magnet">
+                <div class="upgrade-icon">🧲</div>
+                <h3>System Pull (Magnet)</h3>
+                <p>Permanently doubles your attraction distance, magnetically drawing Resilience Bulbs from afar.</p>
+                <div class="price">💡 200</div>
+                <button class="btn btn-shop btn-buy" id="btn-buy-magnet" data-upgrade-action="buy" data-upgrade-name="magnet" data-cost="200">ACQUIRE MAGNET</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Overlay: Electoral Bonds (Satirical Funding Tool) -->
+        <div id="bonds-screen" class="overlay hidden">
+          <div class="overlay-content bond-content">
+            <div class="bond-header">
+              <h2 class="press-start text-gold text-pulse">📜 UNDER-THE-TABLE FUNDS</h2>
+              <button id="btn-close-bonds" class="btn-close">&times;</button>
+            </div>
+            
+            <p class="flavor-text text-gold">"Why spend years writing competitive exams when you can fund your struggle anonymously in complete secrecy? Bypasses red tape instantly!"</p>
+
+            <div class="bond-graphic-container">
+              <div class="briefcase-animation">💼</div>
+              <div class="arrow-indicator">➔</div>
+              <div class="swiss-vault">🏦</div>
+            </div>
+
+            <div class="bond-options">
+              <!-- Satirical Bond Option -->
+              <div class="bond-card">
+                <h3>Corporate Kickback Bond</h3>
+                <p>Transfer mock corporate donations through shell accounts. Instantly credit your wallet.</p>
+                <div class="bond-benefit">+10,000 💡 Resilience Bulbs (Mock-Credit)</div>
+                <button id="btn-buy-bond-mock" class="btn btn-gold btn-pulse">SECURE ANONYMOUS FUNDS (FREE)</button>
+              </div>
+
+              <!-- Real Developer Support Option -->
+              <div class="bond-card featured">
+                <div class="ribbon">VIP</div>
+                <h3>Premium Chai Bond (Support Dev)</h3>
+                <p>Support our developer! Buy us a delicious cup of Chai to fuel further awesome game creations.</p>
+                <div class="bond-benefit">Eternal Developer Gratitude + 10k Resilience Bulbs!</div>
+                <a href="https://ko-fi.com" target="_blank" id="btn-buy-bond-real" class="btn btn-primary text-center-link">🍵 BUY A CHAI ($3.00)</a>
+              </div>
+            </div>
+            
+            <p class="disclaimer">*The Corporate Kickback Bond is entirely a gameplay mockup for in-game currency. No real charges are made. The Chai link opens external creator support pages.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portrait Orientation Warning Overlay (Shows only on mobile in portrait mode) -->
+  <div id="orientation-overlay" class="orientation-modal">
+    <div class="orientation-modal-content">
+      <div class="phone-rotate-icon">🔄📱</div>
+      <h2 class="orientation-title">ROTATE YOUR DEVICE</h2>
+      <p class="orientation-text">Please rotate your phone to landscape mode for the ultimate Desi Arcade experience!</p>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
