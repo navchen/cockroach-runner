@@ -2896,8 +2896,7 @@ class GameEngine {
         if (e.target.closest('button') || 
             e.target.closest('a') || 
             e.target.closest('.hud-icon-btn') || 
-            e.target.closest('.overlay') || 
-            e.target.closest('#mobile-duck-overlay')) {
+            e.target.closest('.overlay')) {
           return;
         }
         
@@ -2918,19 +2917,6 @@ class GameEngine {
       }
       e.preventDefault();
     });
-
-    // Mobile slide trigger button
-    const duckBtn = document.getElementById('btn-mobile-duck');
-    if (duckBtn) {
-      duckBtn.addEventListener('touchstart', (e) => {
-        if (this.gameState === 'PLAYING') this.player.duck(true);
-        e.preventDefault();
-      });
-      duckBtn.addEventListener('touchend', (e) => {
-        if (this.gameState === 'PLAYING') this.player.duck(false);
-        e.preventDefault();
-      });
-    }
 
     // UI screen controls
     document.getElementById('btn-start').addEventListener('click', () => this.startGame());
