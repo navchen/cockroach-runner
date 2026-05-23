@@ -502,19 +502,19 @@ class ParallaxBackground {
     const h = this.canvas.height;
     
     // -------------------------------------------------------------
-    // LAYER 1: Vivid Sky Blue Gradient (Daylight Bright mock)
+    // LAYER 1: Vivid Sky Blue Gradient (Lightened pastel city sky)
     // -------------------------------------------------------------
     const skyGrad = ctx.createLinearGradient(0, 0, 0, 370);
-    skyGrad.addColorStop(0, '#2eaaff'); // Radiant vivid blue
-    skyGrad.addColorStop(0.6, '#56c6ff'); // Medium cyan blue
-    skyGrad.addColorStop(1, '#aae5ff'); // Soft pastel light sky
+    skyGrad.addColorStop(0, '#bae6fd'); // Extremely soft light sky blue (sky-200)
+    skyGrad.addColorStop(0.6, '#e0f2fe'); // Soft pastel cyan blue (sky-100)
+    skyGrad.addColorStop(1, '#f0f9ff'); // Clean white-blue transition (sky-50)
     ctx.fillStyle = skyGrad;
     ctx.fillRect(0, 0, w, 370);
     
     // Sun rays glow behind skyscrapers
     const sunGrad = ctx.createRadialGradient(250, 200, 10, 250, 200, 300);
-    sunGrad.addColorStop(0, 'rgba(255,255,255,0.4)');
-    sunGrad.addColorStop(0.5, 'rgba(255,255,255,0.1)');
+    sunGrad.addColorStop(0, 'rgba(255,255,255,0.45)');
+    sunGrad.addColorStop(0.5, 'rgba(255,255,255,0.15)');
     sunGrad.addColorStop(1, 'transparent');
     ctx.fillStyle = sunGrad;
     ctx.fillRect(0, 0, w, 370);
@@ -528,7 +528,7 @@ class ParallaxBackground {
       const startAngle = (r * (Math.PI * 2) / rayCount) + Math.sin(timeSec + r * 1.5) * 0.2;
       const widthAngle = 0.25;
       
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.06)';
       ctx.beginPath();
       ctx.moveTo(250, 200); // rays origin matching sun radial gradient
       ctx.arc(250, 200, 600, startAngle, startAngle + widthAngle);
@@ -544,8 +544,8 @@ class ParallaxBackground {
       ctx.scale(cloud.scale, cloud.scale);
       
       const cloudGrad = ctx.createLinearGradient(0, -15, 0, 15);
-      cloudGrad.addColorStop(0, 'rgba(255, 255, 255, 0.65)');
-      cloudGrad.addColorStop(1, 'rgba(210, 240, 255, 0.4)');
+      cloudGrad.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
+      cloudGrad.addColorStop(1, 'rgba(219, 243, 255, 0.6)');
       ctx.fillStyle = cloudGrad;
       
       ctx.beginPath();
@@ -560,30 +560,30 @@ class ParallaxBackground {
     });
     
     // -------------------------------------------------------------
-    // LAYER 2: Far City Skyscrapers (Very light semi-transparent cyans)
+    // LAYER 2: Far City Skyscrapers (Bright light translucent cyans)
     // -------------------------------------------------------------
-    ctx.fillStyle = 'rgba(141, 213, 255, 0.55)';
+    ctx.fillStyle = 'rgba(186, 230, 253, 0.45)'; // Much lighter sky cyan
     this.farSkyscrapers.forEach(b => {
       const rx = (this.farCityX + b.x);
       ctx.fillRect(rx, 370 - b.height, b.width, b.height);
       
       // Simple window panels on far buildings
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
       ctx.fillRect(rx + 15, 370 - b.height + 30, b.width - 30, 4);
       ctx.fillRect(rx + 15, 370 - b.height + 50, b.width - 30, 4);
-      ctx.fillStyle = 'rgba(141, 213, 255, 0.55)'; // restore
+      ctx.fillStyle = 'rgba(186, 230, 253, 0.45)'; // restore
     });
 
     // -------------------------------------------------------------
-    // LAYER 3: Near City Skyscrapers (Sleek bright vector cyan/blue)
+    // LAYER 3: Near City Skyscrapers (Sleek light pastel sky blue & cyan)
     // -------------------------------------------------------------
     this.nearSkyscrapers.forEach(b => {
       const rx = (this.nearCityX + b.x);
       
-      // Gradient from beautiful sky-blue down to cyan
+      // Gradient from light pastel sky blue down to a soft bright cyan
       const bGrad = ctx.createLinearGradient(rx, 370 - b.height, rx, 370);
-      bGrad.addColorStop(0, '#3b82f6'); // Solid modern electric blue
-      bGrad.addColorStop(1, '#0891b2'); // Teal/cyan bottom
+      bGrad.addColorStop(0, '#93c5fd'); // Soft light blue (blue-300)
+      bGrad.addColorStop(1, '#a5f3fc'); // Lighter sky cyan (cyan-300)
       
       ctx.fillStyle = bGrad;
       ctx.beginPath();
@@ -605,7 +605,7 @@ class ParallaxBackground {
       
       // Draw optional neon spires with warning lights on top
       if (b.spire) {
-        ctx.strokeStyle = '#00f0ff';
+        ctx.strokeStyle = 'rgba(0, 240, 255, 0.85)';
         ctx.lineWidth = 2.5;
         ctx.beginPath();
         ctx.moveTo(rx + b.width/2, 370 - b.height);
@@ -614,7 +614,7 @@ class ParallaxBackground {
         
         // Glowing flashing red/pink beacon at the spire tip
         ctx.save();
-        ctx.shadowBlur = 15;
+        ctx.shadowBlur = 10;
         ctx.shadowColor = '#ff007f';
         ctx.fillStyle = '#ff007f';
         const blink = Math.sin(Date.now() * 0.007 + b.x) > 0;
@@ -626,10 +626,10 @@ class ParallaxBackground {
         ctx.restore();
       }
       
-      // Rich gold/neon skyscraper grids of glowing window lights
+      // Rich gold/neon skyscraper grids of glowing window lights (soft translucent neon colors)
       ctx.save();
-      ctx.shadowBlur = 8;
-      const lightColors = ['#ffd700', '#00f0ff', '#ff007f', '#a855f7'];
+      ctx.shadowBlur = 5;
+      const lightColors = ['rgba(255, 215, 0, 0.7)', 'rgba(0, 240, 255, 0.7)', 'rgba(255, 0, 127, 0.6)', 'rgba(168, 85, 247, 0.6)'];
       // Assign a consistent neon glow color per skyscraper
       const buildColor = lightColors[Math.floor(b.x) % lightColors.length];
       ctx.shadowColor = buildColor;
@@ -665,12 +665,12 @@ class ParallaxBackground {
     const roadY = 370;
     const roadH = 30; // 30px solid concrete depth block
     
-    // Solid concrete slab
-    ctx.fillStyle = '#b1b9c9'; // Light concrete grey
+    // Solid concrete slab (brightened road for higher contrast with cockroach)
+    ctx.fillStyle = '#e2e8f0'; // Very bright slate grey road
     ctx.fillRect(0, roadY, w, roadH);
     
     // Draw crack textures on the platform
-    ctx.strokeStyle = '#858d9e';
+    ctx.strokeStyle = '#cbd5e1'; // Softer, lighter crack lines
     ctx.lineWidth = 1.5;
     ctx.beginPath();
     // Repeating crack patterns scrolled
@@ -945,9 +945,9 @@ class CockroachPlayer {
     // Mechanics coordinates
     this.groundY = 370;
     this.x = 130;
-    this.y = this.groundY - 55;
-    this.width = 50;
-    this.height = 55;
+    this.width = 62;
+    this.height = 68;
+    this.y = this.groundY - this.height;
     
     this.vy = 0;
     this.gravity = 0.65;
@@ -996,14 +996,14 @@ class CockroachPlayer {
   duck(state) {
     if (state && !this.isDucking && this.isGrounded) {
       this.isDucking = true;
-      this.width = 65;
-      this.height = 25;
+      this.width = 80;
+      this.height = 31;
       this.y = this.groundY - this.height;
       sfx.playDuck();
     } else if (!state && this.isDucking) {
       this.isDucking = false;
-      this.width = 50;
-      this.height = 55;
+      this.width = 62;
+      this.height = 68;
       this.y = this.groundY - this.height;
     }
   }
@@ -1105,6 +1105,7 @@ class CockroachPlayer {
     
     ctx.translate(cx, cy);
     ctx.rotate(angle);
+    ctx.scale(1.25, 1.25); // Slightly increase cockroach render scale by 25%
     
     // -------------------------------------------------------------
     // 1. RUNNING LEGS (Six cute jointed insect legs in 3D-like scurry)
