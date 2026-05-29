@@ -84,7 +84,7 @@ google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
             <div class="start-actions">
               <button id="btn-open-store-start" class="btn btn-secondary">🛒 ARCADE SHOP</button>
             </div>
-            <a href="index.html" class="btn btn-secondary btn-home" style="margin-top: 12px; width: 100%; max-width: 320px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">🏠 RETURN TO PORTAL</a>
+            <a href="index.html" target="_top" class="btn btn-secondary btn-home" style="margin-top: 12px; width: 100%; max-width: 320px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">🏠 RETURN TO PORTAL</a>
           </div>
         </div>
 
@@ -106,7 +106,7 @@ google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
             </div>
 
             <button id="btn-resume" class="btn btn-primary">RESUME RUN</button>
-            <a href="index.html" class="btn btn-secondary btn-home" style="margin-top: 12px; width: 100%; max-width: 320px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">🏠 RETURN TO PORTAL</a>
+            <a href="index.html" target="_top" class="btn btn-secondary btn-home" style="margin-top: 12px; width: 100%; max-width: 320px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">🏠 RETURN TO PORTAL</a>
           </div>
         </div>
 
@@ -136,7 +136,7 @@ google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
               <button id="btn-restart" class="btn btn-primary btn-pulse">RUN AGAIN</button>
               <button id="btn-open-store-go" class="btn btn-secondary">🛒 ARCADE SHOP</button>
             </div>
-            <a href="index.html" class="btn btn-secondary btn-home" style="margin-top: 12px; width: 100%; max-width: 320px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">🏠 RETURN TO PORTAL</a>
+            <a href="index.html" target="_top" class="btn btn-secondary btn-home" style="margin-top: 12px; width: 100%; max-width: 320px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">🏠 RETURN TO PORTAL</a>
           </div>
         </div>
 
@@ -234,5 +234,16 @@ google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
   </div>
 
   <script src="game.js"></script>
+  <script>
+    // If running in an iframe modal, close modal on return to portal click instead of redirecting
+    if (window.self !== window.top) {
+      document.querySelectorAll('.btn-home').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.parent.postMessage({ type: 'close_game_modal' }, '*');
+        });
+      });
+    }
+  </script>
 </body>
 </html>
