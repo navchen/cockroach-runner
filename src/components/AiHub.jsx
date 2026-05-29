@@ -105,7 +105,7 @@ export default function AiHub() {
         </div>
       </div>
 
-      <div style={styles.contentLayout}>
+      <div className="hub-split-layout">
         {/* Left Side: Curated Foundational video resources */}
         <div>
           <div className="hub-section-header">

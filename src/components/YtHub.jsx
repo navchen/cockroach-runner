@@ -63,7 +63,7 @@ export default function YtHub() {
         </div>
       </div>
 
-      <div style={styles.contentLayout}>
+      <div className="hub-split-layout">
         {/* Left Side: Vikas Telugu Tech Playlist grid */}
         <div>
           <div className="hub-section-header">

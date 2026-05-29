@@ -103,7 +103,7 @@ export default function GamingHub() {
           </div>
 
           {/* User Stats Tiles */}
-          <div style={styles.statsContainer}>
+          <div className="gaming-stats-container">
             <div style={styles.statMiniCard}>
               <Award size={18} style={{ color: 'var(--color-gold)' }} />
               <div>
@@ -132,7 +132,7 @@ export default function GamingHub() {
           {/* Perks Inventory */}
           <div style={styles.inventoryContainer}>
             <span style={styles.inventoryTitle}>EQUIPPED PERKS INVENTORY</span>
-            <div style={styles.perksList}>
+            <div className="gaming-perks-list">
               <div style={{ ...styles.perkBadge, opacity: hasShield ? 1 : 0.4, borderColor: hasShield ? 'var(--color-green)' : 'var(--border-light)' }}>
                 <Shield size={14} style={{ color: hasShield ? 'var(--color-green)' : 'var(--text-muted)' }} />
                 <span>Energy Shield: {hasShield ? 'ACTIVE 🛡️' : 'NOT EQUIPPED'}</span>
@@ -198,8 +198,8 @@ export default function GamingHub() {
 
       {/* GAMEPLAY OVERLAY IFRAME MODAL */}
       {isPlayingGame && (
-        <div style={styles.gameOverlay}>
-          <div style={styles.gameModal}>
+        <div className="game-overlay-modal">
+          <div className="game-modal-container">
             <div style={styles.gameModalHeader}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Gamepad2 size={18} style={{ color: 'var(--color-teal)' }} />

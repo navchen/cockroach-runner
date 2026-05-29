@@ -3,7 +3,50 @@ import Navbar from './components/Navbar';
 import AiHub from './components/AiHub';
 import YtHub from './components/YtHub';
 import GamingHub from './components/GamingHub';
-import { Sparkles, Brain, Gamepad2, Award, Lightbulb, BookOpen } from 'lucide-react';
+
+const SparklesIcon = ({ size = 24, ...props }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+  </svg>
+);
+
+const BrainIcon = ({ size = 24, ...props }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1 0-3.12 3.006 3.006 0 0 1 0-3.88 2.5 2.5 0 0 1 0-3.12A2.5 2.5 0 0 1 9.5 2Z"/>
+    <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 0-3.12 3.006 3.006 0 0 0 0-3.88 2.5 2.5 0 0 0 0-3.12A2.5 2.5 0 0 0 14.5 2Z"/>
+  </svg>
+);
+
+const GamepadIcon = ({ size = 24, ...props }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <rect x="2" y="6" width="20" height="12" rx="2"/>
+    <path d="M12 12h.01"/>
+    <path d="M16 12h.01"/>
+    <path d="M6 12h4"/>
+    <path d="M8 10v4"/>
+  </svg>
+);
+
+const AwardIcon = ({ size = 24, ...props }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <circle cx="12" cy="8" r="7"/>
+    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+  </svg>
+);
+
+const LightbulbIcon = ({ size = 24, ...props }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1 .4 2.5 1.5 3.5.7.8 1.3 1.5 1.5 2.5"/>
+    <path d="M9 18h6"/><path d="M10 22h4"/>
+  </svg>
+);
+
+const BookOpenIcon = ({ size = 24, ...props }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+  </svg>
+);
 
 const YoutubeIcon = ({ size = 24, ...props }) => (
   <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" {...props}>
@@ -64,15 +107,15 @@ export default function App() {
         {activeTab === 'home' && (
           <div className="tab-panel">
             {/* Widget A: Hero Banner Welcome */}
-            <div className="welcome-hero" style={styles.welcomeHero}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                <Sparkles size={18} style={{ color: 'var(--color-gold)' }} />
+            <div className="welcome-hero">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
+                <SparklesIcon size={18} style={{ color: 'var(--color-gold)' }} />
                 <span style={{ fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--color-gold)' }}>
                   CENTRAL INFOTAINMENT PLATFORM
                 </span>
               </div>
-              <h2 style={styles.welcomeTitle}>GNA ARENA PORTAL</h2>
-              <p style={styles.welcomeDesc}>
+              <h2 className="welcome-title" style={styles.welcomeTitle}>GNA ARENA PORTAL</h2>
+              <p className="welcome-desc" style={styles.welcomeDesc}>
                 Welcome to the official education and entertainment portal for <span style={{ color: 'white', fontWeight: '800' }}>gnaarena.in</span>. 
                 Explore simplified artificial intelligence courses in our <span style={{ color: '#38bdf8', fontWeight: '700' }}>AI Made Easy</span> zone, study video creation and audience scaling inside the <span style={{ color: '#fbbf24', fontWeight: '700' }}>YT Creators</span> hub, and play the Cockroach Runner reflex simulator.
               </p>
@@ -86,7 +129,7 @@ export default function App() {
                 {/* Launcher 1: AI */}
                 <div className="launch-card ai-theme" onClick={() => setActiveTab('ai')}>
                   <div className="launch-icon-box">
-                    <Brain size={22} />
+                    <BrainIcon size={22} />
                   </div>
                   <h4 className="launch-title">AI Made Easy Hub</h4>
                   <p className="launch-desc">Master Machine Learning foundations, Generative AI models, and Python simplified.</p>
@@ -99,14 +142,14 @@ export default function App() {
                     <YoutubeIcon size={22} />
                   </div>
                   <h4 className="launch-title">YT Creators Hub</h4>
-                  <p className="launch-desc">Access professional video production tutorials, scripting roadmaps, and editing secrets.</p>
+                  <p className="launch-desc">Access video production tutorials, scripting roadmaps, and editing secrets.</p>
                   <span className="launch-action">ACCESS CREATOR GUIDES ➔</span>
                 </div>
 
                 {/* Launcher 3: Retro Simulator */}
                 <div className="launch-card game-theme" onClick={() => setActiveTab('gaming')}>
                   <div className="launch-icon-box">
-                    <Gamepad2 size={22} />
+                    <GamepadIcon size={22} />
                   </div>
                   <h4 className="launch-title">Reflex Arcade Center</h4>
                   <p className="launch-desc">Launch the Cockroach Runner simulator and track high scores in real-time.</p>
@@ -129,7 +172,7 @@ export default function App() {
                 <div className="stats-widget-grid">
                   <div className="stat-box">
                     <div className="stat-icon-wrapper cyan">
-                      <Brain size={18} />
+                      <BrainIcon size={18} />
                     </div>
                     <div>
                       <div className="stat-number">92%</div>
@@ -139,7 +182,7 @@ export default function App() {
 
                   <div className="stat-box">
                     <div className="stat-icon-wrapper gold">
-                      <Award size={18} />
+                      <AwardIcon size={18} />
                     </div>
                     <div>
                       <div className="stat-number">{highScore} PTS</div>
@@ -149,7 +192,7 @@ export default function App() {
 
                   <div className="stat-box">
                     <div className="stat-icon-wrapper pink">
-                      <Lightbulb size={18} />
+                      <LightbulbIcon size={18} />
                     </div>
                     <div>
                       <div className="stat-number">💡 {bulbsCount}</div>
@@ -159,7 +202,7 @@ export default function App() {
 
                   <div className="stat-box">
                     <div className="stat-icon-wrapper purple">
-                      <BookOpen size={18} />
+                      <BookOpenIcon size={18} />
                     </div>
                     <div>
                       <div className="stat-number">ACTIVE</div>
@@ -175,8 +218,8 @@ export default function App() {
                 <h4 className="insight-title">{dailyInsight.title}</h4>
                 <p className="insight-text">{dailyInsight.text}</p>
                 <div style={styles.insightFooter}>
-                  <BookOpen size={12} style={{ color: 'var(--color-teal)', marginRight: '0.25rem' }} />
-                  <span>Curated for gnaarena.in learners</span>
+                  <BookOpenIcon size={12} style={{ color: 'var(--color-teal)', marginRight: '0.25rem', display: 'inline', verticalAlign: 'middle' }} />
+                  <span style={{ verticalAlign: 'middle' }}>Curated for gnaarena.in learners</span>
                 </div>
               </div>
 
@@ -209,12 +252,6 @@ export default function App() {
 }
 
 const styles = {
-  welcomeHero: {
-    padding: '3.5rem 3rem',
-    borderRadius: '12px',
-    background: 'linear-gradient(135deg, var(--color-navy) 0%, #1e293b 100%)',
-    color: 'white',
-  },
   welcomeTitle: {
     fontSize: '2rem',
     fontWeight: '900',
