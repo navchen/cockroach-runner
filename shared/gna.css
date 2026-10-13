@@ -1,0 +1,280 @@
+/* ==========================================================================
+   GNA Arena — shared brand layer
+   Loaded by every page. Gives all modules one neutral base (the home page's
+   sage palette), one font, one dark mode, and keeps a single accent per module
+   (the same colour each module wears on the home page cards):
+     AI → purple · Python → green · Playwright → blue · System design → amber
+   ========================================================================== */
+
+@view-transition { navigation: auto; }
+
+:root {
+  --gna-font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --gna-serif: Georgia, "Times New Roman", serif;
+  --gna-bg: #f7f8f3;
+  --gna-surface: #ffffff;
+  --gna-surface-alt: #fafbf7;
+  --gna-ink: #20302a;
+  --gna-muted: #69746d;
+  --gna-line: #e1e6dc;
+  --gna-brand: #315b46;
+  --gna-brand-soft: #edf2e7;
+  --gna-shadow: 0 10px 30px #1f362a12;
+  --gna-radius: 14px;
+}
+html[data-theme="dark"], html.gna-dark {
+  --gna-bg: #121915;
+  --gna-surface: #1a231e;
+  --gna-surface-alt: #1f2a24;
+  --gna-ink: #e5ebe3;
+  --gna-muted: #a2afa6;
+  --gna-line: #314038;
+  --gna-brand: #a9cf94;
+  --gna-brand-soft: #24332a;
+  --gna-shadow: 0 10px 30px #0006;
+}
+
+/* ---------- Module accent + neutral mapping ---------- */
+
+/* Atlas AI — purple */
+html[data-gna-module="ai"] {
+  --bg: #f7f8f3; --surface: #fff; --subtle: #fafbf7; --ink: #262b2f; --muted: #6d7270; --line: #e3e6de;
+  --purple: #6b58a6; --purple-soft: #efebf7; --hero: #2a2541; --shadow: 0 6px 24px #2b25410a;
+}
+html[data-gna-module="ai"][data-theme="dark"] {
+  --bg: #121915; --surface: #1a231e; --subtle: #1f2a24; --ink: #e7ebe4; --muted: #a7b0a9; --line: #314038;
+  --purple: #bba9f2; --purple-soft: #2e2a3f; --hero: #241f36; --shadow: none;
+}
+
+/* Testcraft (Playwright) — blue */
+html[data-gna-module="playwright"] body {
+  --bg: #f7f8f3; --surface: #fff; --surface-alt: #fafbf7; --ink: #24302e; --muted: #6b7672; --line: #e2e6de;
+  --accent: #3d6a8b; --accent-dark: #2f5675; --wash: #e7eff5; --shadow: 0 6px 24px #1f364a0b;
+}
+html[data-gna-module="playwright"] body.dark {
+  --bg: #121915; --surface: #1a231e; --surface-alt: #1f2a24; --ink: #e5ebe3; --muted: #a2afa6; --line: #314038;
+  --accent: #9cc4e2; --accent-dark: #7eaed3; --wash: #21313d;
+}
+
+/* Testcraft: hard-coded purples → module blue */
+html[data-gna-module="playwright"] .hero,
+html[data-gna-module="playwright"] .plan-overview,
+html[data-gna-module="playwright"] .plan-ring:before { background: #1d2c3a; }
+html[data-gna-module="playwright"] .hero:before { background: radial-gradient(circle, #5d97c435, transparent 65%); }
+html[data-gna-module="playwright"] .hero .eyebrow,
+html[data-gna-module="playwright"] .hero h2 span { color: #a9cdea; }
+html[data-gna-module="playwright"] .hero .btn-primary { background: #9cc4e2; border-color: #9cc4e2; color: #12212d; }
+html[data-gna-module="playwright"] .hero .btn-primary:hover { background: #b8d6ee; }
+html[data-gna-module="playwright"] .hero-editor { background: #26394a; box-shadow: 0 15px 30px #0b141c80; }
+html[data-gna-module="playwright"] .hero:after { color: #8fb6d41a; }
+html[data-gna-module="playwright"] .code-purple { color: #a9cdea; }
+html[data-gna-module="playwright"] .floating-chip { background: #e7eff5; color: #2f5675; }
+html[data-gna-module="playwright"] .code-block { background: #1e2a33; color: #d6e2ea; }
+html[data-gna-module="playwright"] .toast { background: #1d2c3a; }
+html[data-gna-module="playwright"] dialog::backdrop { background: #1d2c3a60; }
+html[data-gna-module="playwright"] .plan-ring { background: conic-gradient(#9cc4e2 var(--percent), #3c4f5e 0); }
+html[data-gna-module="playwright"] .sidebar-plan { background: linear-gradient(145deg, #eef4f8, #f3f6f1); border-color: #dde8ef; }
+html[data-gna-module="playwright"] .sidebar-plan a { color: #3d6a8b; border-color: #dde8ef; }
+html[data-gna-module="playwright"] .week-day i { border-color: #d3e0e9; }
+html[data-gna-module="playwright"] .review-card { background: linear-gradient(150deg, #eef4f8, #f2f5f1); border-color: #dde8ef; }
+html[data-gna-module="playwright"] .review-card .review-symbol { background: #dde9f2; color: #3d6a8b; }
+html[data-gna-module="playwright"] .review-card .btn { border-color: #d3e0e9; }
+html[data-gna-module="playwright"] .activity-entry i { background: #7eaed3; }
+html[data-gna-module="playwright"] .note-banner .icon { color: #7eaed3; }
+html[data-gna-module="playwright"] .chip.active,
+html[data-gna-module="playwright"] .quiz-option:has(input:checked) { border-color: #b9d2e4; }
+html[data-gna-module="playwright"] input:focus,
+html[data-gna-module="playwright"] select:focus,
+html[data-gna-module="playwright"] textarea:focus { box-shadow: 0 0 0 3px #3d6a8b20; }
+html[data-gna-module="playwright"] :focus-visible { outline-color: #5d97c4; }
+html[data-gna-module="playwright"] .lab-mark.lab-result { border-color: #9cc4e2; }
+html[data-gna-module="playwright"] .dark .btn-primary { background: #5d97c4; border-color: #5d97c4; color: #0e1a23; }
+html[data-gna-module="playwright"] .dark .btn-primary:hover { background: #7eaed3; }
+html[data-gna-module="playwright"] .dark .sidebar-plan,
+html[data-gna-module="playwright"] .dark .review-card { background: #1c2730; border-color: #2c3d4a; }
+html[data-gna-module="playwright"] .dark .sidebar-plan h3,
+html[data-gna-module="playwright"] .dark .review-card h3 { color: #cfe0ee; }
+html[data-gna-module="playwright"] .dark .sidebar-plan .tiny-label,
+html[data-gna-module="playwright"] .dark .sidebar-plan a { color: #9cc4e2; }
+html[data-gna-module="playwright"] .dark .review-card .btn { background: #22313d; color: #b8d6ee; }
+html[data-gna-module="playwright"] .dark .review-card .review-symbol { background: #263846; color: #9cc4e2; }
+html[data-gna-module="playwright"] .dark .chip.active,
+html[data-gna-module="playwright"] .dark .quiz-option:has(input:checked) { border-color: #3f5b70; }
+html[data-gna-module="playwright"] .dark .week-day i { border-color: #34495a; }
+
+/* Systems Studio sidebar: indigo details → amber on sage-dark */
+html[data-gna-module="system-design"] .mark { background: #b07a3c; }
+html[data-gna-module="system-design"] .sidebar-intro .eyebrow { color: #e0b98a; }
+html[data-gna-module="system-design"] .brand,
+html[data-gna-module="system-design"] .navbtn:hover,
+html[data-gna-module="system-design"] .navbtn.active { color: #f4f6f1; }
+html[data-gna-module="system-design"] .navbtn:hover { background: #26352d; }
+html[data-gna-module="system-design"] .sideprogress { border-color: #34463c; }
+html[data-gna-module="system-design"] .sidebar .progress { background: #34463c; }
+html[data-gna-module="system-design"] .sidebar .progress span { background: #e3b880; }
+html[data-gna-module="system-design"] .sidebar-bottom { border-color: #2c3b33; }
+html[data-gna-module="system-design"] .hero-art { box-shadow: 0 12px 30px #3b2a140d; }
+
+/* Python Atelier — green (already the home family; align neutrals only) */
+html[data-gna-module="python"] body { --bg: #f7f8f3; --line: #e1e6dc; }
+html[data-gna-module="python"] body.dark { --bg: #121915; --surface: #1a231e; --line: #314038; }
+
+/* Systems Studio — amber */
+html[data-gna-module="system-design"] {
+  --bg: #f7f8f3; --surface: #fff; --text: #262c26; --muted: #6a726a; --line: #e2e5dc;
+  --accent: #8a5d2c; --soft: #f5ede1; --gold: #8a5d2c; --code: #f2f2ec;
+  --nav-bg: #1d2a24; --nav-text: #b3c0b7; --nav-active: #2e3f36;
+  --hero: #f6efe3; --hero-text: #3a2914; --success: #2f7a5c; --shadow: 0 6px 22px #3b2a1409;
+}
+html[data-gna-module="system-design"][data-theme="dark"] {
+  --bg: #121915; --surface: #1a231e; --text: #e8ebe3; --muted: #a8b1a8; --line: #314038;
+  --accent: #e3b880; --soft: #352c20; --gold: #e3b880; --code: #212c26;
+  --nav-bg: #0e1411; --nav-text: #a9b6ad; --nav-active: #24322b;
+  --hero: #2a2319; --hero-text: #f1e7d8; --success: #8fd5b6; --shadow: none;
+}
+html[data-gna-module="system-design"][data-theme="dark"] .btn.primary { color: #2a1d0c; }
+html[data-gna-module="system-design"] .btn:hover { box-shadow: 0 3px 10px #3b2a1414; }
+
+/* One typeface across modules */
+html[data-gna-module] body { font-family: var(--gna-font); }
+
+/* Visible keyboard focus everywhere */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--gna-brand) 80%, transparent);
+  outline-offset: 2px;
+}
+
+/* ---------- Home page dark mode ---------- */
+html.gna-dark .arena-app { --arena-ink: #e5ebe3; --arena-green: #a9cf94; --arena-muted: #a2afa6; background: #121915; }
+html.gna-dark body, html.gna-dark .app-container { background: #121915; }
+html.gna-dark .arena-header { background: #121915ee; border-color: #26332c; }
+html.gna-dark .arena-nav a { color: #a2afa6; }
+html.gna-dark .arena-nav a:hover, html.gna-dark .arena-nav a[aria-current] { color: #cfe5c2; border-color: #7fa36c; }
+html.gna-dark .nav-start { border-color: #3a4a40; color: #e5ebe3; }
+html.gna-dark .nav-start:hover { background: #1f2a24; }
+html.gna-dark .arena-eyebrow, html.gna-dark .hero-note, html.gna-dark .map-caption { color: #93a688; }
+html.gna-dark .arena-hero h1 em, html.gna-dark .guide-intro h2 em { color: #a9cf94; }
+html.gna-dark .arena-button { background: #a9cf94; border-color: #a9cf94; color: #10201a !important; }
+html.gna-dark .arena-button:hover { background: #c0dfae; }
+html.gna-dark .learning-map { background: radial-gradient(#1f2a22 0, #0000 65%); }
+html.gna-dark .map-grid { background-image: radial-gradient(#a9cf9426 1px, #0000 1px); }
+html.gna-dark .map-orbit { border-color: #3d4f43; }
+html.gna-dark .map-center { background: #2c4a3a; border-color: #1f2a24; box-shadow: 0 0 0 1px #3d4f43; }
+html.gna-dark .map-node { background: #1a231ef2; border-color: #314038; box-shadow: 0 7px 22px #0005; }
+html.gna-dark .map-node small, html.gna-dark .arena-stats span, html.gna-dark .module-meta,
+html.gna-dark .module-bottom > span, html.gna-dark .arena-footer p, html.gna-dark .arena-footer small { color: #95a198; }
+html.gna-dark .node-ai { color: #bba9f2 !important; }
+html.gna-dark .node-python { color: #a9cf94 !important; }
+html.gna-dark .node-playwright { color: #9cc4e2 !important; }
+html.gna-dark .node-systems { color: #e3b880 !important; }
+html.gna-dark .arena-stats, html.gna-dark .arena-stats > div, html.gna-dark .arena-personal,
+html.gna-dark .module-bottom { border-color: #2b3830; }
+html.gna-dark .module-search { background: #1a231e; border-color: #314038; color: #95a198; }
+html.gna-dark .module-search input { background: transparent; }
+html.gna-dark .module-card { background: #1a231e; border-color: #2b3830; --module-color: #bba9f2; }
+html.gna-dark .module-green { --module-color: #a9cf94; }
+html.gna-dark .module-blue { --module-color: #9cc4e2; }
+html.gna-dark .module-orange { --module-color: #e3b880; }
+html.gna-dark .module-card:hover { border-color: #46594c; box-shadow: 0 9px 24px #0006; }
+html.gna-dark .module-art { background: #2a2639; }
+html.gna-dark .module-green .module-art { background: #22301f; }
+html.gna-dark .module-blue .module-art { background: #1d2c37; }
+html.gna-dark .module-orange .module-art { background: #33291c; }
+html.gna-dark .module-symbol { background: #ffffff10; border-color: #ffffff1a; }
+html.gna-dark .topic-tags li { background: #1f2a24; border-color: #2b3830; color: #a2afa6; }
+html.gna-dark .module-empty, html.gna-dark .learning-guide { background: #18211c; border-color: #2b3830; }
+html.gna-dark .guide-steps li > span { color: #a9cf94; border-color: #3a4a40; }
+html.gna-dark .arena-footer { background: #0f1512; border-color: #26332c; }
+html.gna-dark .arena-footer > div { color: #c7d6c4; }
+html.gna-dark ::-webkit-scrollbar-track { background: #121915; }
+html.gna-dark ::-webkit-scrollbar-thumb { background: #314038; }
+
+/* ---------- Shared controls (theme toggle, search trigger) ---------- */
+.gna-tools { display: inline-flex; gap: 8px; align-items: center; margin-left: 10px; }
+.gna-icon-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 38px; min-width: 38px; padding: 0 10px; border-radius: 10px;
+  border: 1px solid #c9d4c4; background: transparent; color: var(--arena-ink, var(--gna-ink));
+  font: 600 12px/1 var(--gna-font); cursor: pointer; transition: background .15s, border-color .15s;
+}
+.gna-icon-btn:hover { background: var(--gna-brand-soft); }
+html.gna-dark .gna-icon-btn { border-color: #3a4a40; }
+.gna-icon-btn kbd { font: 600 11px/1 var(--gna-font); color: var(--gna-muted); border: 1px solid var(--gna-line); border-radius: 5px; padding: 3px 5px; }
+.gna-icon-btn svg { width: 17px; height: 17px; }
+.arena-header-inner .gna-tools { margin-left: -16px; }
+@media (max-width: 1100px) { .arena-header-inner .gna-tools { margin-left: auto; } .arena-header-inner .gna-tools + .nav-start { margin-left: 0; } }
+@media (max-width: 760px) {
+  .gna-icon-btn .gna-label, .gna-icon-btn kbd { display: none; }
+  .gna-icon-btn { height: 34px; min-width: 34px; padding: 0 8px; }
+  .arena-header-inner .gna-tools { gap: 6px; }
+  .arena-header-inner { column-gap: 10px; }
+}
+
+/* ---------- Continue learning (home) ---------- */
+.gna-continue { max-width: 1224px; margin: 8px auto 40px; padding: 0 24px; font-family: var(--gna-font); }
+.gna-continue h2 { font: 400 28px/1.2 var(--gna-serif); color: var(--arena-ink, var(--gna-ink)); margin: 0 0 4px; }
+.gna-continue > p { color: var(--gna-muted); margin: 0 0 18px; font-size: 14px; }
+.gna-continue-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.gna-cont-card {
+  --c: #6b58a6; display: flex; flex-direction: column; gap: 10px; padding: 18px; border-radius: var(--gna-radius);
+  background: var(--gna-surface); border: 1px solid var(--gna-line); text-decoration: none; color: var(--gna-ink);
+  transition: transform .2s cubic-bezier(.16,1,.3,1), box-shadow .2s, border-color .2s;
+}
+.gna-cont-card:hover { transform: translateY(-2px); box-shadow: var(--gna-shadow); border-color: color-mix(in srgb, var(--c) 45%, var(--gna-line)); }
+.gna-cont-card small { font: 700 11px/1 var(--gna-font); letter-spacing: .08em; text-transform: uppercase; color: var(--c); }
+.gna-cont-card strong { font-size: 15px; line-height: 1.35; font-weight: 600; }
+.gna-cont-card span.gna-go { margin-top: auto; font-size: 13px; color: var(--gna-muted); }
+.gna-bar { height: 6px; border-radius: 99px; background: color-mix(in srgb, var(--c) 14%, var(--gna-surface-alt)); overflow: hidden; }
+.gna-bar i { display: block; height: 100%; width: 0; background: var(--c); border-radius: inherit; transition: width .9s cubic-bezier(.16,1,.3,1); }
+[data-m="ai"] { --c: #6b58a6; } [data-m="python"] { --c: #3f6a46; } [data-m="playwright"] { --c: #3d6a8b; } [data-m="system-design"] { --c: #8a5d2c; }
+html.gna-dark [data-m="ai"] { --c: #bba9f2; } html.gna-dark [data-m="python"] { --c: #a9cf94; }
+html.gna-dark [data-m="playwright"] { --c: #9cc4e2; } html.gna-dark [data-m="system-design"] { --c: #e3b880; }
+
+/* progress chip injected into home module cards */
+.gna-card-progress { display: flex; align-items: center; gap: 10px; margin-top: 12px; font: 500 12px/1 var(--gna-font); color: var(--arena-muted, var(--gna-muted)); }
+.gna-card-progress .gna-bar { flex: 1; --c: var(--module-color); }
+
+/* ---------- Command palette (Ctrl/⌘ K) ---------- */
+.gna-palette {
+  width: min(640px, calc(100vw - 32px)); max-height: min(560px, calc(100vh - 80px)); margin: 10vh auto auto; padding: 0;
+  border: 1px solid var(--gna-line); border-radius: 16px; background: var(--gna-surface); color: var(--gna-ink);
+  box-shadow: 0 30px 80px #0f1a1440; font-family: var(--gna-font); overflow: hidden;
+}
+.gna-palette::backdrop { background: #0f1a1466; backdrop-filter: blur(3px); }
+.gna-palette[open] { display: flex; flex-direction: column; animation: gnaPop .18s cubic-bezier(.16,1,.3,1); }
+.gna-pal-input { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--gna-line); }
+.gna-pal-input svg { width: 18px; height: 18px; color: var(--gna-muted); flex-shrink: 0; }
+.gna-pal-input input::-webkit-search-cancel-button { display: none; }
+.gna-pal-input input { flex: 1; border: 0; outline: 0; background: transparent; color: inherit; font: 400 16px/1.4 var(--gna-font); min-width: 0; }
+.gna-pal-input kbd { font: 600 11px/1 var(--gna-font); color: var(--gna-muted); border: 1px solid var(--gna-line); border-radius: 5px; padding: 4px 6px; }
+.gna-pal-list { overflow-y: auto; padding: 8px; margin: 0; list-style: none; }
+.gna-pal-group { padding: 10px 10px 6px; font: 700 11px/1 var(--gna-font); letter-spacing: .08em; text-transform: uppercase; color: var(--gna-muted); }
+.gna-pal-item a { display: grid; grid-template-columns: 10px 1fr auto; align-items: center; gap: 12px; padding: 10px; border-radius: 10px; color: inherit; text-decoration: none; }
+.gna-pal-item a .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+.gna-pal-item a > span:nth-child(2) { min-width: 0; }
+.gna-pal-item a b { display: block; font-weight: 600; font-size: 14px; }
+.gna-pal-item a span.d { display: block; font-size: 12.5px; color: var(--gna-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+.gna-pal-item a em { font-style: normal; font-size: 12px; color: var(--gna-muted); }
+.gna-pal-item a .ok { color: var(--c); font-weight: 600; }
+.gna-pal-item[aria-selected="true"] a { background: color-mix(in srgb, var(--c) 12%, var(--gna-surface)); }
+.gna-pal-empty { padding: 28px; text-align: center; color: var(--gna-muted); font-size: 14px; }
+.gna-pal-foot { display: flex; gap: 16px; padding: 10px 16px; border-top: 1px solid var(--gna-line); font-size: 12px; color: var(--gna-muted); }
+.gna-pal-foot kbd { font: 600 10.5px/1 var(--gna-font); border: 1px solid var(--gna-line); border-radius: 4px; padding: 2px 5px; margin-right: 4px; }
+mark.gna-hl { background: color-mix(in srgb, var(--c) 22%, transparent); color: inherit; border-radius: 3px; padding: 0 1px; }
+@keyframes gnaPop { from { opacity: 0; transform: translateY(8px) scale(.985); } }
+
+/* ---------- Scroll reveal (home) ---------- */
+.gna-reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s cubic-bezier(.16,1,.3,1); }
+.gna-reveal.gna-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  .gna-reveal { opacity: 1; transform: none; transition: none; }
+  .gna-palette[open] { animation: none; }
+  .gna-bar i, .gna-cont-card { transition: none; }
+}
+@media (max-width: 380px) {
+  .arena-header-inner .nav-start svg { display: none; }
+  .arena-header-inner .nav-start { padding: 9px 10px; }
+  .arena-header-inner { column-gap: 8px; }
+}
